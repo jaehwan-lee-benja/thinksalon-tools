@@ -1,15 +1,14 @@
-<title>마이삼각형 · 생각살롱</title>
+<title>생각살롱 · 통합센터</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <style>
 :root{
   --bg:#eaeeee; --surface:#ffffff; --surface-2:#f4f8f7; --inset:#eef3f2;
   --ink:#16211f; --ink-2:#3a4a47; --muted:#5f716e; --faint:#8a9997;
   --border:#d8e0de; --border-2:#e6ecea; --hair:#eef2f1;
-  --accent:#0c7d6f; --accent-2:#0a6357; --accent-ink:#ffffff; --accent-wash:#e2f1ee;
-  --me:#0c7d6f; --rel:#b47417; --work:#3a6ea5; --center:#8a4fbf;
-  --shadow:0 1px 2px rgba(20,40,38,.05), 0 1px 0 rgba(20,40,38,.02);
-  --radius:8px; --radius-sm:5px;
-  --mono:ui-monospace,"SF Mono","JetBrains Mono",Menlo,monospace;
+  --accent:#0c7d6f; --accent-2:#0a6357; --accent-ink:#fff; --accent-wash:#e2f1ee;
+  --tool:#3a6ea5; --ai:#8a4fbf; --book:#b47417;
+  --shadow:0 1px 2px rgba(20,40,38,.05); --radius:10px; --radius-sm:5px;
+  --mono:ui-monospace,"SF Mono",Menlo,monospace;
   --sans:-apple-system,BlinkMacSystemFont,"Apple SD Gothic Neo","Pretendard","Noto Sans KR",system-ui,sans-serif;
 }
 @media (prefers-color-scheme:dark){:root{
@@ -17,224 +16,90 @@
   --ink:#e7edeb; --ink-2:#c2cfcc; --muted:#8b9c99; --faint:#647471;
   --border:#243230; --border-2:#1c2827; --hair:#182322;
   --accent:#34b6a6; --accent-2:#48c6b6; --accent-ink:#04201c; --accent-wash:#12302b;
-  --me:#34b6a6; --rel:#d4a03f; --work:#5b9bd5; --center:#b98fe0;
-  --shadow:0 1px 2px rgba(0,0,0,.3);
+  --tool:#5b9bd5; --ai:#b98fe0; --book:#d4a03f; --shadow:0 1px 2px rgba(0,0,0,.3);
 }}
-:root[data-theme="light"]{--bg:#eaeeee;--surface:#fff;--surface-2:#f4f8f7;--inset:#eef3f2;--ink:#16211f;--ink-2:#3a4a47;--muted:#5f716e;--faint:#8a9997;--border:#d8e0de;--border-2:#e6ecea;--hair:#eef2f1;--accent:#0c7d6f;--accent-2:#0a6357;--accent-ink:#fff;--accent-wash:#e2f1ee;--me:#0c7d6f;--rel:#b47417;--work:#3a6ea5;--center:#8a4fbf;--shadow:0 1px 2px rgba(20,40,38,.05)}
-:root[data-theme="dark"]{--bg:#0b1110;--surface:#131b19;--surface-2:#0f1715;--inset:#0d1413;--ink:#e7edeb;--ink-2:#c2cfcc;--muted:#8b9c99;--faint:#647471;--border:#243230;--border-2:#1c2827;--hair:#182322;--accent:#34b6a6;--accent-2:#48c6b6;--accent-ink:#04201c;--accent-wash:#12302b;--me:#34b6a6;--rel:#d4a03f;--work:#5b9bd5;--center:#b98fe0;--shadow:0 1px 2px rgba(0,0,0,.3)}
+:root[data-theme="light"]{--bg:#eaeeee;--surface:#fff;--surface-2:#f4f8f7;--ink:#16211f;--ink-2:#3a4a47;--muted:#5f716e;--faint:#8a9997;--border:#d8e0de;--border-2:#e6ecea;--accent:#0c7d6f;--accent-2:#0a6357;--accent-ink:#fff;--accent-wash:#e2f1ee;--tool:#3a6ea5;--ai:#8a4fbf;--book:#b47417;--shadow:0 1px 2px rgba(20,40,38,.05)}
+:root[data-theme="dark"]{--bg:#0b1110;--surface:#131b19;--surface-2:#0f1715;--ink:#e7edeb;--ink-2:#c2cfcc;--muted:#8b9c99;--faint:#647471;--border:#243230;--border-2:#1c2827;--accent:#34b6a6;--accent-2:#48c6b6;--accent-ink:#04201c;--accent-wash:#12302b;--tool:#5b9bd5;--ai:#b98fe0;--book:#d4a03f;--shadow:0 1px 2px rgba(0,0,0,.3)}
 *{box-sizing:border-box}
-body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--sans);font-size:15px;line-height:1.5;-webkit-font-smoothing:antialiased}
-.wrap{max-width:1120px;margin:0 auto;padding:24px 20px 64px}
-.top{display:flex;align-items:flex-end;justify-content:space-between;gap:16px;flex-wrap:wrap;margin-bottom:8px}
-.brand{display:flex;flex-direction:column;gap:5px}
-.eyebrow{font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);font-weight:600}
-h1{margin:0;font-size:23px;font-weight:750;letter-spacing:-.01em}
-.sub{color:var(--muted);font-size:13px}
-.top-right{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
-.btn{appearance:none;border:1px solid var(--border);background:var(--surface);color:var(--ink-2);font-family:var(--sans);font-size:12.5px;font-weight:600;padding:7px 12px;border-radius:var(--radius-sm);cursor:pointer;display:inline-flex;align-items:center;gap:5px}
-.btn:hover{border-color:var(--accent);color:var(--accent)}
-.btn.pri{background:var(--accent);color:var(--accent-ink);border-color:var(--accent)}
-.btn.pri:hover{background:var(--accent-2)}
-.mono{font-family:var(--mono);font-size:11px}
-input,select,textarea{font-family:var(--sans);color:var(--ink);background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-sm)}
-input:focus,textarea:focus,select:focus{outline:2px solid var(--accent);outline-offset:1px;border-color:var(--accent)}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--sans);font-size:15px;line-height:1.55;-webkit-font-smoothing:antialiased}
+.wrap{max-width:900px;margin:0 auto;padding:40px 20px 64px}
+.top{display:flex;align-items:flex-start;justify-content:space-between;gap:16px}
+.brand{display:flex;flex-direction:column;gap:8px}
+.eyebrow{font-family:var(--mono);font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--accent);font-weight:600}
+h1{margin:0;font-size:30px;font-weight:780;letter-spacing:-.02em}
+.tag{color:var(--muted);font-size:14px;max-width:560px;line-height:1.6}
+.tag b{color:var(--ink-2);font-weight:650}
+.tglbtn{appearance:none;border:1px solid var(--border);background:var(--surface);color:var(--ink-2);font-family:var(--mono);font-size:11px;padding:7px 11px;border-radius:var(--radius-sm);cursor:pointer;flex-shrink:0}
+.tglbtn:hover{border-color:var(--accent);color:var(--accent)}
 
-/* 문서 바 */
-.docbar{display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin:14px 0 18px;padding:10px 12px;background:var(--surface-2);border:1px solid var(--border-2);border-radius:var(--radius)}
-.docbar .ti{flex:1;min-width:160px;padding:7px 10px;font-size:14px;font-weight:600}
-.docbar select{padding:7px 10px;font-size:12.5px}
-.savenote{font-family:var(--mono);font-size:10.5px;color:var(--faint);margin-left:auto}
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:34px}
+@media (max-width:760px){.grid{grid-template-columns:1fr}}
+.card{--c:var(--accent);display:flex;flex-direction:column;gap:0;background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);box-shadow:var(--shadow);overflow:hidden;text-decoration:none;color:inherit;transition:border-color .12s,transform .12s}
+.card.live:hover{border-color:var(--c);transform:translateY(-2px)}
+.card.soon{opacity:.72;cursor:default}
+.card .top-strip{height:4px;background:var(--c)}
+.card .body{padding:20px 18px 18px;display:flex;flex-direction:column;gap:9px;flex:1}
+.card .ic{font-size:26px}
+.card .nm{font-size:17px;font-weight:730;display:flex;align-items:center;gap:8px}
+.card .desc{font-size:12.5px;color:var(--muted);line-height:1.6;flex:1}
+.card .cta{font-family:var(--mono);font-size:11px;font-weight:600;color:var(--c);letter-spacing:.03em;margin-top:4px}
+.chip{font-family:var(--mono);font-size:9px;font-weight:700;letter-spacing:.06em;padding:2px 7px;border-radius:20px;text-transform:uppercase}
+.chip.on{background:var(--accent-wash);color:var(--accent)}
+.chip.wip{background:var(--inset);color:var(--faint)}
+.tool{--c:var(--tool)} .ai{--c:var(--ai)} .book{--c:var(--book)}
 
-/* 층위 토글 */
-.layers{display:inline-flex;border:1px solid var(--border);border-radius:20px;overflow:hidden}
-.layers button{appearance:none;border:0;background:var(--surface);color:var(--muted);font-family:var(--sans);font-size:11.5px;font-weight:600;padding:6px 12px;cursor:pointer}
-.layers button.on{background:var(--accent);color:var(--accent-ink)}
-
-/* 본체 그리드 */
-.main{display:grid;grid-template-columns:1fr 1fr;gap:18px;align-items:start}
-@media (max-width:820px){.main{grid-template-columns:1fr}}
-
-.card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);box-shadow:var(--shadow)}
-.canvas{padding:16px 16px 8px;position:sticky;top:16px}
-.layer-hint{font-size:11.5px;color:var(--muted);text-align:center;margin:2px 0 8px;line-height:1.4}
-.layer-hint b{color:var(--ink-2)}
-svg{width:100%;height:auto;display:block}
-
-/* 입력 패널 */
-.form{display:flex;flex-direction:column;gap:0}
-.axis{border-top:1px solid var(--hair);padding:14px 16px}
-.axis:first-child{border-top:0}
-.axis-h{display:flex;align-items:center;gap:8px;margin-bottom:10px}
-.dot{width:10px;height:10px;border-radius:50%;flex-shrink:0}
-.axis-h .nm{font-size:15px;font-weight:700}
-.axis-h .en{font-family:var(--mono);font-size:10px;color:var(--faint);letter-spacing:.05em}
-.axis-h .desc{font-size:11px;color:var(--muted);margin-left:auto;text-align:right}
-.field{margin-bottom:9px}
-.field:last-child{margin-bottom:0}
-.field label{display:block;font-size:11.5px;font-weight:600;color:var(--ink-2);margin-bottom:3px}
-.field label .h{font-weight:400;color:var(--faint);font-size:10.5px}
-.field textarea{width:100%;min-height:38px;padding:7px 9px;font-size:13px;resize:vertical;line-height:1.45}
-.field.center textarea{min-height:34px}
-
-.foot{margin-top:22px;padding-top:14px;border-top:1px solid var(--border-2);color:var(--faint);font-size:11.5px;line-height:1.6}
-.foot b{color:var(--muted)}
-@media print{.top-right,.docbar,.foot{display:none}.canvas{position:static}}
+.note{margin-top:34px;padding:16px 18px;background:var(--surface-2);border:1px solid var(--border-2);border-radius:var(--radius);font-size:12.5px;color:var(--muted);line-height:1.7}
+.note b{color:var(--ink-2)}
+.foot{margin-top:26px;font-size:11.5px;color:var(--faint);line-height:1.7}
 </style>
 
 <div class="wrap">
   <header class="top">
     <div class="brand">
-      <span class="eyebrow">생각살롱 · 생각정리 도구</span>
-      <h1>마이삼각형</h1>
-      <span class="sub">내 삶을 <b style="color:var(--me)">나</b> · <b style="color:var(--rel)">관계</b> · <b style="color:var(--work)">일(돈)</b> 세 축과 중앙 <b style="color:var(--center)">가치</b>로 조망하는 방향성 진단</span>
+      <span class="eyebrow">생각살롱</span>
+      <h1>통합센터</h1>
+      <span class="tag">생각정리 방법론을 <b>읽고(전자책)</b>, <b>직접 써보고(온라인 툴)</b>, <b>상담받는(AI 상담사)</b> 세 갈래. 마이삼각형으로 나를 조망하는 데서 시작합니다.</span>
     </div>
-    <div class="top-right">
-      <div class="layers" id="layers">
-        <button data-l="1" class="on">1층 · 인간계</button>
-        <button data-l="2">2층 · 야생</button>
-      </div>
-      <button class="btn" id="tgl" type="button">◐ 테마</button>
-    </div>
+    <button class="tglbtn" id="tgl" type="button">◐ 테마</button>
   </header>
 
-  <div class="docbar">
-    <input class="ti" id="title" type="text" placeholder="제목 (예: 2026 상반기 나의 삼각형)">
-    <button class="btn pri" id="save" type="button">저장</button>
-    <select id="load"><option value="">저장된 삼각형 불러오기…</option></select>
-    <button class="btn" id="new" type="button">새로</button>
-    <button class="btn" id="del" type="button">삭제</button>
-    <button class="btn" id="print" type="button">인쇄/PDF</button>
-    <span class="savenote" id="savenote">이 기기에만 저장됨 (localStorage)</span>
-  </div>
+  <div class="grid">
+    <a class="card tool live" href="./my-triangle.html">
+      <div class="top-strip"></div>
+      <div class="body">
+        <div class="ic">🧭</div>
+        <div class="nm">마이삼각형 <span class="chip on">라이브</span></div>
+        <div class="desc">나(지·덕·체)·관계·일(돈)·중앙 가치로 삶을 조망하는 방향성 진단. 1층(인간계)/2층(야생) 층위로 나눠 정리. 익명 로컬 저장.</div>
+        <div class="cta">지금 써보기 →</div>
+      </div>
+    </a>
 
-  <div class="main">
-    <!-- 캔버스 -->
-    <div class="card canvas">
-      <div class="layer-hint" id="layerHint"></div>
-      <svg id="tri" viewBox="0 0 400 360" role="img" aria-label="마이삼각형"></svg>
-    </div>
+    <a class="card ai live" href="./counselor.html">
+      <div class="top-strip"></div>
+      <div class="body">
+        <div class="ic">🤖</div>
+        <div class="nm">AI 상담사 <span class="chip on">체험</span></div>
+        <div class="desc">마이삼각형으로 화두를 짚고, 개념 근거로 해석하고, 나 기준의 방향을 함께 찾는 상담. Claude 기반(당신 키로 체험). 상담 한계·안전 안내 포함.</div>
+        <div class="cta">상담 시작 →</div>
+      </div>
+    </a>
 
-    <!-- 입력 -->
-    <div class="card form" id="form">
-      <div class="axis">
-        <div class="axis-h"><span class="dot" style="background:var(--me)"></span><span class="nm">나 (自)</span><span class="en">ME · 지·덕·체</span><span class="desc">나에 대한 관심에서 시작</span></div>
-        <div class="field"><label>지 (知) <span class="h">— 재미를 만드는 호기심</span></label><textarea data-k="me.ji" placeholder="나의 호기심·관심·재미는 무엇인가"></textarea></div>
-        <div class="field"><label>덕 (德) <span class="h">— 내 중심을 잡는 태도</span></label><textarea data-k="me.deok" placeholder="남을 카피하지 않는, 내가 원하는 태도"></textarea></div>
-        <div class="field"><label>체 (體) <span class="h">— 기반·건강·컨디션</span></label><textarea data-k="me.che" placeholder="나를 지탱하는 몸·에너지·기반"></textarea></div>
-      </div>
-      <div class="axis">
-        <div class="axis-h"><span class="dot" style="background:var(--rel)"></span><span class="nm">관계</span><span class="en">RELATION</span><span class="desc">감정 객관화 · 과제분리</span></div>
-        <div class="field"><label>감정 객관화 <span class="h">— 감정을 '내 부분'으로 의연하게</span></label><textarea data-k="rel.emotion" placeholder="지금 나를 흔드는 감정, 한 발 떨어져 보기"></textarea></div>
-        <div class="field"><label>과제분리 <span class="h">— 내 과제 / 상대의 과제</span></label><textarea data-k="rel.task" placeholder="이건 내 과제인가, 상대의 과제인가"></textarea></div>
-        <div class="field"><label>수평 관계 <span class="h">— 수직(위아래) 아닌 수평으로</span></label><textarea data-k="rel.horizon" placeholder="이 관계를 수평으로 다시 세운다면"></textarea></div>
-      </div>
-      <div class="axis">
-        <div class="axis-h"><span class="dot" style="background:var(--work)"></span><span class="nm">일 (돈)</span><span class="en">WORK</span><span class="desc">본업 / 생업</span></div>
-        <div class="field"><label>본업 <span class="h">— 내 판·내가 만드는 가치</span></label><textarea data-k="work.main" placeholder="내가 진짜 만들고 싶은 가치·내 판은"></textarea></div>
-        <div class="field"><label>생업 <span class="h">— 지금의 생계 수단</span></label><textarea data-k="work.side" placeholder="지금 나를 먹여살리는 일"></textarea></div>
-      </div>
-      <div class="axis">
-        <div class="axis-h"><span class="dot" style="background:var(--center)"></span><span class="nm">중앙 · 가치축</span><span class="en">CORE</span><span class="desc">세 축을 관통하는 신념</span></div>
-        <div class="field center"><label>나의 중심 가치·신념 <span class="h">— 세 축을 꿰는 한 문장</span></label><textarea data-k="center" placeholder="나는 무엇을 믿고 무엇을 향해 사는가"></textarea></div>
+    <div class="card book soon">
+      <div class="top-strip"></div>
+      <div class="body">
+        <div class="ic">📖</div>
+        <div class="nm">전자책 <span class="chip wip">준비 중</span></div>
+        <div class="desc">방법론을 독서 여정별 다권 시리즈로. 1권 「나를 아는 법 — 생각정리 입문」 집필 중(마이삼각형·메타머신·과제분리·진입기 방향성).</div>
+        <div class="cta">곧 공개</div>
       </div>
     </div>
   </div>
 
-  <div class="foot" id="foot"></div>
+  <div class="note" id="note"></div>
+  <div class="foot">생각살롱 · 온라인 툴 시리즈 · 입력 데이터는 각 도구에서 이 브라우저에만 저장(서버 없음)</div>
 </div>
 
 <script>
-/* ── 상태 ── */
-const KEYS=['me.ji','me.deok','me.che','rel.emotion','rel.task','rel.horizon','work.main','work.side','center'];
-let state={layer:1, title:'', data:{}};
-const LS='thinksalon.mytriangle.docs';
-const $=s=>document.querySelector(s);
-const esc=s=>String(s==null?'':s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
-
-/* ── 층위 문구 ── */
-const LAYER={
-  1:{t:'1층 · 사적인 세상 (인간계)', d:'인본주의 — 나·관계를 따뜻하게. <b>내가 원하는 태도로 관계와 나를 세우는 층.</b>'},
-  2:{t:'2층 · 공적인 세상 (자연계·야생)', d:'약육강식 — 일·돈에서 살아남기. <b>냉정한 현실 위에서 내 판을 만드는 층.</b>'}
-};
-function renderHint(){ $('#layerHint').innerHTML = `<b>${LAYER[state.layer].t}</b> — ${LAYER[state.layer].d}`; }
-
-/* ── 삼각형 SVG ── */
-function pt(cx,cy){return `${cx},${cy}`}
-function axisFilled(prefix){ return KEYS.filter(k=>k.startsWith(prefix)).filter(k=>(state.data[k]||'').trim()).length; }
-function axisTotal(prefix){ return KEYS.filter(k=>k.startsWith(prefix)).length; }
-function nodeCircle(cx,cy,color,label,en,filled,total){
-  const r=13, full=filled/total;
-  return `<g>
-    <circle cx="${cx}" cy="${cy}" r="26" fill="var(--surface)" stroke="${color}" stroke-width="2" opacity="${0.25+0.75*full}"/>
-    <circle cx="${cx}" cy="${cy}" r="26" fill="none" stroke="${color}" stroke-width="3" stroke-dasharray="${163*full} 163" transform="rotate(-90 ${cx} ${cy})" stroke-linecap="round"/>
-    <text x="${cx}" y="${cy-1}" text-anchor="middle" font-family="var(--sans)" font-size="14" font-weight="700" fill="var(--ink)">${label}</text>
-    <text x="${cx}" y="${cy+12}" text-anchor="middle" font-family="var(--mono)" font-size="8.5" fill="var(--faint)">${filled}/${total}</text>
-  </g>`;
-}
-function summaryText(x,y,anchor,prefix,color){
-  const items=KEYS.filter(k=>k.startsWith(prefix)).map(k=>(state.data[k]||'').trim()).filter(Boolean);
-  if(!items.length) return '';
-  return items.slice(0,3).map((t,i)=>`<text x="${x}" y="${y+i*13}" text-anchor="${anchor}" font-family="var(--sans)" font-size="10" fill="var(--ink-2)">${esc(t.length>26?t.slice(0,25)+'…':t)}</text>`).join('');
-}
-function renderTri(){
-  const A=[200,40], B=[54,300], C=[346,300], G=[200,213]; // 나 top / 관계 좌 / 일 우 / 무게중심
-  const cv=(state.data.center||'').trim();
-  const svg=`
-    <polygon points="${pt(...A)} ${pt(...B)} ${pt(...C)}" fill="var(--accent-wash)" stroke="var(--border)" stroke-width="1.5" opacity="0.5"/>
-    <line x1="${A[0]}" y1="${A[1]}" x2="${G[0]}" y2="${G[1]}" stroke="var(--hair)" stroke-width="1"/>
-    <line x1="${B[0]}" y1="${B[1]}" x2="${G[0]}" y2="${G[1]}" stroke="var(--hair)" stroke-width="1"/>
-    <line x1="${C[0]}" y1="${C[1]}" x2="${G[0]}" y2="${G[1]}" stroke="var(--hair)" stroke-width="1"/>
-    ${summaryText(200,90,'middle','me','var(--me)')}
-    ${summaryText(20,250,'start','rel','var(--rel)')}
-    ${summaryText(380,250,'end','work','var(--work)')}
-    ${nodeCircle(A[0],A[1],'var(--me)','나',' ',axisFilled('me'),axisTotal('me'))}
-    ${nodeCircle(B[0],B[1],'var(--rel)','관계',' ',axisFilled('rel'),axisTotal('rel'))}
-    ${nodeCircle(C[0],C[1],'var(--work)','일',' ',axisFilled('work'),axisTotal('work'))}
-    <circle cx="${G[0]}" cy="${G[1]}" r="30" fill="var(--surface)" stroke="var(--center)" stroke-width="2" opacity="${cv?1:0.4}"/>
-    <text x="${G[0]}" y="${G[1]-3}" text-anchor="middle" font-family="var(--mono)" font-size="8.5" fill="var(--center)" font-weight="700">가치</text>
-    <foreignObject x="${G[0]-40}" y="${G[1]+2}" width="80" height="40">
-      <div xmlns="http://www.w3.org/1999/xhtml" style="font-family:var(--sans);font-size:9px;color:var(--ink-2);text-align:center;line-height:1.2;overflow:hidden;max-height:38px">${esc(cv?(cv.length>34?cv.slice(0,33)+'…':cv):'')}</div>
-    </foreignObject>`;
-  $('#tri').innerHTML=svg;
-}
-
-function render(){ renderHint(); renderTri(); }
-
-/* ── 입력 바인딩 ── */
-document.querySelectorAll('textarea[data-k]').forEach(t=>{
-  t.addEventListener('input',()=>{ state.data[t.dataset.k]=t.value; renderTri(); markDirty(); });
-});
-$('#layers').addEventListener('click',e=>{ const b=e.target.closest('button'); if(!b)return;
-  state.layer=+b.dataset.l; document.querySelectorAll('#layers button').forEach(x=>x.classList.toggle('on',x===b)); render(); markDirty(); });
-
-/* ── 테마 ── */
-$('#tgl').addEventListener('click',()=>{ const r=document.documentElement; const cur=r.getAttribute('data-theme')||(matchMedia('(prefers-color-scheme:dark)').matches?'dark':'light'); r.setAttribute('data-theme',cur==='dark'?'light':'dark'); });
-
-/* ── 저장/불러오기 (localStorage) ── */
-function allDocs(){ try{return JSON.parse(localStorage.getItem(LS)||'{}')}catch(e){return{}} }
-function refreshLoad(){ const d=allDocs(); const sel=$('#load'); sel.innerHTML='<option value="">저장된 삼각형 불러오기…</option>'+Object.keys(d).sort().map(k=>`<option value="${esc(k)}">${esc(k)}</option>`).join(''); }
-let dirty=false;
-function markDirty(){ if(!dirty){dirty=true; $('#savenote').textContent='• 저장 안 됨';} }
-function collect(){ state.title=$('#title').value.trim(); return {layer:state.layer,title:state.title,data:{...state.data}}; }
-$('#save').addEventListener('click',()=>{
-  const doc=collect(); if(!doc.title){ $('#title').focus(); $('#savenote').textContent='제목을 입력하세요'; return; }
-  const d=allDocs(); d[doc.title]=doc; localStorage.setItem(LS,JSON.stringify(d)); refreshLoad(); $('#load').value=doc.title; dirty=false; $('#savenote').textContent='저장됨 · '+doc.title;
-});
-$('#load').addEventListener('change',()=>{ const k=$('#load').value; if(!k)return; const doc=allDocs()[k]; if(!doc)return; applyDoc(doc); $('#savenote').textContent='불러옴 · '+k; dirty=false; });
-$('#del').addEventListener('click',()=>{ const k=$('#load').value||$('#title').value.trim(); if(!k)return; const d=allDocs(); if(d[k]){ delete d[k]; localStorage.setItem(LS,JSON.stringify(d)); refreshLoad(); newDoc(); $('#savenote').textContent='삭제됨 · '+k; } });
-$('#new').addEventListener('click',newDoc);
-$('#print').addEventListener('click',()=>window.print());
-function applyDoc(doc){
-  state.layer=doc.layer||1; state.title=doc.title||''; state.data={...(doc.data||{})};
-  $('#title').value=state.title;
-  document.querySelectorAll('#layers button').forEach(x=>x.classList.toggle('on',+x.dataset.l===state.layer));
-  document.querySelectorAll('textarea[data-k]').forEach(t=>t.value=state.data[t.dataset.k]||'');
-  render();
-}
-function newDoc(){ applyDoc({layer:1,title:'',data:{}}); $('#load').value=''; dirty=false; $('#savenote').textContent='새 삼각형'; }
-
-/* ── 푸터 ── */
-$('#foot').innerHTML='<b>마이삼각형</b> — 생각살롱 방향성 진단 도구. 삶을 나(지·덕·체)·관계·일(돈) 세 축 + 중앙 가치로 조망한다. 1층(인간계·인본) / 2층(자연계·야생)로 층위를 나눠 본다. <b>모든 입력은 이 브라우저에만 저장</b>되며 서버로 전송되지 않는다.';
-
-refreshLoad(); render();
+document.getElementById('tgl').onclick=()=>{const r=document.documentElement;const cur=r.getAttribute('data-theme')||(matchMedia('(prefers-color-scheme:dark)').matches?'dark':'light');r.setAttribute('data-theme',cur==='dark'?'light':'dark');};
+document.getElementById('note').innerHTML='<b>세 도구는 하나로 이어집니다</b> — 마이삼각형으로 <b>진단</b>하고, AI 상담사가 그 위에서 <b>대화</b>하며, 전자책이 <b>개념</b>을 깊게 풀어줍니다. AI 상담사는 지금 개인 체험(당신의 Claude 키)으로 열려 있고, 공개 서비스용 백엔드는 설계 단계입니다.';
 </script>
